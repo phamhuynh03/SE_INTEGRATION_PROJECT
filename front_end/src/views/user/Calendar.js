@@ -6,6 +6,11 @@ import { Component } from 'react';
 import NotesHeader from "components/Headers/NotesHeader.js";
 import Scheduler from 'components/Scheduler';
 
+import 'dhtmlx-scheduler';
+import 'dhtmlx-scheduler/codebase/dhtmlxscheduler_material.css';
+
+const scheduler = window.scheduler;
+
 const haha = [
   { start_date:'2023-11-25 6:00', end_date:'2023-11-25 9:00', text:'Event 1', id: 1},
   { start_date:'2023-11-22 10:00', end_date:'2023-11-22 18:00', text:'Event 2', id: 2 },
@@ -69,17 +74,25 @@ class Calendar extends Component {
       var formatFunc = scheduler.date.date_to_str("%Y-%m-%d %H:%i");
       var start_datee = formatFunc(ev.start_date);
       var end_datee = formatFunc(ev.end_date);
-      let addedEvent={};
-      addedEvent.start_date = start_datee,
-      addedEvent.end_date = end_datee,
-      addedEvent.text = ev.text,
-      addedEvent.id = ev.id,
+      let addedEvent = {};
+      addedEvent.start_date = start_datee
+      addedEvent.end_date = end_datee
+      addedEvent.text = ev.text
+      addedEvent.id = ev.id
       
       console.log(start_datee);
       //console.log(action);
       if(action == 'create')
       {
-        fetch('http://localhost:5000/api/create',
+        // fetch('http://localhost:5000/api/create',
+        // {
+        //   method: 'post',
+        //   headers:{
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(addedEvent),
+        // })
+        fetch('https://savig-project.vercel.app/api/create',
         {
           method: 'post',
           headers:{
@@ -90,7 +103,15 @@ class Calendar extends Component {
       }
       else if(action == 'delete')
       {
-        fetch('http://localhost:5000/api/delete',
+        // fetch('http://localhost:5000/api/delete',
+        // {
+        //   method: 'post',
+        //   headers:{
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({id: ev.id}),
+        // })
+        fetch('https://savig-project.vercel.app/api/delete',
         {
           method: 'post',
           headers:{
@@ -101,7 +122,15 @@ class Calendar extends Component {
       }
       else if(action == 'update')
       {
-        fetch('http://localhost:5000/api/update',
+        // fetch('http://localhost:5000/api/update',
+        // {
+        //   method: 'post',
+        //   headers:{
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(addedEvent),
+        // })
+        fetch('https://savig-project.vercel.app/api/update',
         {
           method: 'post',
           headers:{
@@ -174,11 +203,19 @@ class Calendar extends Component {
 
   componentDidMount() {
   const that = this;
-  fetch('http://localhost:5000/api').then((response) => {return response.json()}).then((dataa) => {
+  // fetch('http://localhost:5000/api').then((response) => {return response.json()}).then((dataa) => {
+  //   //const tmp = dataa;
+  //   that.setState({data : dataa, test: "yeah",});
+  //   console.log(that.state.data);
+  //   console.log(that.state.test);
+  //   //console.log(process.env.GENERATE_SOURCEMAP);
+  // })
+  fetch('https://savig-project.vercel.app/api').then((response) => {return response.json()}).then((dataa) => {
     //const tmp = dataa;
     that.setState({data : dataa, test: "yeah",});
     console.log(that.state.data);
     console.log(that.state.test);
+    //console.log(process.env.GENERATE_SOURCEMAP);
   })
   .catch(console.error);
   console.log('gfsadjk');

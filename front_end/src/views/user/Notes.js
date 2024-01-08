@@ -12,7 +12,8 @@ function Notes() {
   useEffect(() => {
     async function fetchNotes() {
       try {
-        const response = await fetch('http://localhost:5000/api/notes');
+        // const response = await fetch('http://localhost:5000/api/notes');
+        const response = await fetch('https://savig-project.vercel.app/api/notes');
         if (!response.ok) {
           throw new Error('Failed to fetch notes');
         }
@@ -28,7 +29,8 @@ function Notes() {
   const addNote = async (color) => {
     const newId = Date.now() + Math.floor(Math.random() * 1000);
     try {
-      const response = await fetch('http://localhost:5000/api/notes/new', {
+      // const response = await fetch('http://localhost:5000/api/notes/new', {
+        const response = await fetch('https://savig-project.vercel.app/api/notes/new', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +56,8 @@ function Notes() {
   
   const deleteNote = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/notes/remove/${id}`, {
+      //const response = await fetch(`http://localhost:5000/api/notes/remove/${id}`, {
+        const response = await fetch(`https://savig-project.vercel.app/api/notes/remove/${id}`, {
         method: 'DELETE',
       });
   
@@ -73,7 +76,8 @@ function Notes() {
   
   const updateText = async (text, id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/notes/update/${id}`, {
+      //const response = await fetch(`http://localhost:5000/api/notes/update/${id}`, {
+        const response = await fetch(`https://savig-project.vercel.app/api/notes/update/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

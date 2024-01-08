@@ -11,6 +11,20 @@ function Note(props) {
     if (!value) return "";
 
     const date = new Date(value);
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "March",
+      "April",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sept",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
 
     let hrs = date.getHours();
     hrs = hrs < 10 ? "0" + hrs : hrs;
@@ -19,13 +33,11 @@ function Note(props) {
     min = min < 10 ? "0" + min : min;
 
     let day = date.toLocaleString('default', { day: '2-digit' });
-    let month = date.toLocaleString('default', { month: 'short' });
+    const month = monthNames[date.getMonth()];
+    let year = date.toLocaleString('default', { year: 'numeric' });
 
-    return `${hrs}:${min} ${day} ${month}`;
-};
-
-
-
+    return `${hrs}:${min} ${day} ${month} ${year}`;
+  };
 
   const debounce = (func) => {
     clearTimeout(timeout);

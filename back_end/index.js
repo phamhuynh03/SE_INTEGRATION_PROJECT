@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const noteRoutes = require('./routes/NoteRoute');
+require('dotenv').config()
 //const { MongoClient, ServerApiVersion } = require('mongodb');
 
 app.use(cors({
@@ -11,7 +12,7 @@ app.use(cors({
 }))
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-
+//console.log()
 async function connect(){
 
     try {
@@ -59,7 +60,17 @@ const EventsSchem = new Schema({
  
    const Events = mongoose.model('Events', EventsSchem);
    
-
+   app.get("/", (req, res) => {
+    // const data = [
+    //     { start_date:'2023-11-25 6:00', end_date:'2023-11-25 9:00', text:'Event 1', id: 1},
+    //     { start_date:'2023-11-22 10:00', end_date:'2023-11-22 18:00', text:'Event 2', id: 2 },
+    //     { start_date:'2023-11-26 10:00', end_date:'2023-11-26 12:00', text:'Event 1', id: 3},
+    //     { start_date:'2023-11-23 10:00', end_date:'2023-11-23 12:00', text:'Event 1', id: 4},
+    //     //{start_date: 'Tue Nov 21 2023 02:10:00 ', end_date: 'Tue Nov 21 2023 07:15:00 ', text: 'fs', id: 1704085403824,},
+    //   ];
+    res.send("Welcome")
+    
+} )
 
 app.get("/api", (req, res) => {
     // const data = [
@@ -104,5 +115,5 @@ app.post('/api/update',(req, res) => {
 })
 
 app.use('/api/notes', noteRoutes);
-
+//const host = process.env.HOST_NAME;
 app.listen(5000, () => {console.log("Server started on port 5000")})

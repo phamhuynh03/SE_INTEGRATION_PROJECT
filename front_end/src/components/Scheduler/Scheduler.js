@@ -107,7 +107,7 @@ export default class Scheduler extends Component {
             timeFormatState: this.props.timeFormatState,
           onDataUpdated : this.props.onDataUpdated,
         })
-        scheduler.init(this.schedulerContainer, new Date(2023, 10, 20));
+        scheduler.init(this.schedulerContainer, new Date());
         scheduler.clearAll();
         scheduler.parse(this.state.events);
     }
@@ -184,7 +184,7 @@ export default class Scheduler extends Component {
     }
 
     setHoursScaleFormat(state) {
-        scheduler.config.hour_date = state ? '%H:%i' : '%g:%i %A';
+        scheduler.config.hour_date = '%H:%i';
         scheduler.templates.hour_scale = scheduler.date.date_to_str(scheduler.config.hour_date);
     }
 
